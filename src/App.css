@@ -1,38 +1,141 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  height: 100%;
+  background: linear-gradient(351deg, rgba(231,99,8,1) 2%, rgba(37,128,187,100) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  color: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.dashboard {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 1050px;
+  padding-bottom: 50px;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2.2rem;
+  letter-spacing: .3rem;
+  text-transform: uppercase;
+}
+
+.intro {
+  text-align: center;
+  padding: 2.5rem;
+}
+
+.search {
+  max-width: 350px;
+  margin: 0px auto;
+  display: flex;
+}
+
+.location-search-input {
+  font-family: 'Montserrat', sans-serif;
+  width: 350px;
+  height: 40px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: black;
+  padding: .7rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255, 0.8);
+  background: rgba(255,255,255, 0.1);
+  color: #f8f8f8;
+}
+
+.location-search-input:focus {
+  outline: none !important;
+  border-color: rgb(255, 255, 255);
+  box-shadow: 0 0 30px rgb(222, 204, 155);
+}
+
+.location-search-input::placeholder {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.input-suggestion {
+  font-family:  'Montserrat', sans-serif;
+  width: 300px;
+  margin-left: 25px;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  padding: 1.4rem;
+  font-size: 0.9rem;
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.autocomplete-dropdown-container {
+    position: absolute;
+    z-index: 1;
+    width: 350px;
+    border-radius: 25px;
+    background-color: rgb(255, 255, 255);
+}
+
+.time-container {
+  width: 300px;
+  border-radius: 6px;
+  box-shadow: 10px -2px 20px 2px rgb(0 0 0 / 30%);
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.197);
+  backdrop-filter: blur(10px);
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+  
+}
+
+.unit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-handle-unit {
+  padding: 5px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  margin: 0 10px;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.date {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
 }
