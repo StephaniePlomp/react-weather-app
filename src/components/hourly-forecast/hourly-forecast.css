@@ -1,0 +1,42 @@
+.hourly-container {
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  width: 330px;
+  height: 190px;
+  border-radius: 8px;
+  padding: 20px;
+  height: 190px;
+  margin-bottom: 10px;
+}
+
+.carousel {
+  cursor: grab;
+  overflow: hidden;
+}
+
+.hourly-item {
+  min-width: 90px;
+  padding: 10px;
+}
+
+.inner-carousel {
+  display: flex;
+}
+
+.hourly-item {
+  min-height: 110px;
+  align-items: center;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.icon-hourly {
+  width: 40px;
+  padding: 10px 0;
+  pointer-events: none;
+}
+
+.font-temp {
+  font-size: 1rem;
+  font-weight: 700;
+}

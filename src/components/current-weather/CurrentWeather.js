@@ -8,14 +8,9 @@ function CurrentWeather({
     details,
     icon,
     temp,
-    temp_min,
-    temp_max,
-    sunrise,
-    sunset,
     speed,
     humidity,
     feels_like,
-    timezone,
   },
 }) {
   return (
@@ -28,7 +23,7 @@ function CurrentWeather({
         <img
           alt="weather"
           className="weather-icon"
-          src={`icons/${icon}.png`}
+          src={process.env.PUBLIC_URL + `/assets/icons/${icon}.png`}
         />
         </div>
         

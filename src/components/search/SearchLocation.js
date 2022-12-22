@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import React, { useState, useRef, useEffect } from 'react';
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
   } from 'react-places-autocomplete';
+import { toast } from 'react-toastify';
+import PlaceIcon from '@mui/icons-material/Place';
+import { Tooltip } from '@mui/material';
 
   
 function SearchLocation({ setQuery }) {
@@ -25,24 +27,42 @@ function SearchLocation({ setQuery }) {
           lat,
           lon,
         });
-
-    console.log(latLng)
     };
-  
-
+    
     const handleLocationClick = () => {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          let lat = position.coords.latitude;
-          let lon = position.coords.longitude;
-  
-          setQuery({
-            lat,
-            lon,
-          });
-        });
+        toast.info('Fetching users geolocation...')
+        navigator.geolocation.getCurrentPosition(savePosition, noPosition)
+      } else {
+        noPosition(null)
+        toast.info('Geolocation is not supported by this browser')
       }
     };
+
+   const savePosition = (position) => {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+
+    setQuery({
+      lat,
+      lon,
+    });
+  }
+  
+const noPosition= (error) => {
+    toast.info('User has not given access to geolocation. You will be redirected to the default location. ')
+  }
+
+    const renderAfterCalled = useRef(false);
+
+    useEffect(() => {
+      if (!renderAfterCalled.current) {
+      handleLocationClick();
+    }
+
+    renderAfterCalled.current = true;
+    }, [])
   
     return (
       <>
@@ -50,13 +70,16 @@ function SearchLocation({ setQuery }) {
         value={address}
         onChange={setAddress}
         onSelect={handleSelect}
+        textInputProps={{
+          autoFocus: true,
+        }}
         searchOptions={{ types: ['locality', 'country'] }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
             <input
               {...getInputProps({
-                placeholder: 'Search location',
+                placeholder: 'Search location here',
                 className: 'location-search-input',
               })}
             />
@@ -66,7 +89,6 @@ function SearchLocation({ setQuery }) {
                 const className = suggestion.active
                   ? 'suggestion-item--active'
                   : 'suggestion-item';
-                // inline style for demonstration purpose
                 const style = suggestion.active
                   ? { backgroundColor: '#fafafa', cursor: 'pointer',}
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
@@ -75,6 +97,7 @@ function SearchLocation({ setQuery }) {
                     {...getSuggestionItemProps(suggestion, {
                       style,
                     })}
+                    key={suggestion.placeId}
                   >
                     <span>{suggestion.description}</span>
                   </div>
@@ -84,11 +107,18 @@ function SearchLocation({ setQuery }) {
           </div>
         )}
       </PlacesAutocomplete>
-        <LocationOnOutlinedIcon
+      <div className='location-button'>
+      <Tooltip 
+      title={<p style={{fontSize: ".8rem"}}>Get live location</p>}
+      placement="top"
+      arrow>
+        <PlaceIcon
         onClick={handleLocationClick}
-        fontSize='large'
+        fontSize='medium'
         cursor= 'pointer'
         />
+      </Tooltip>
+      </div>
       </>
     );
   }

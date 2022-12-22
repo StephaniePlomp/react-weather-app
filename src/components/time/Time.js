@@ -1,5 +1,5 @@
 import React from "react";
-import { formatToLocalTime } from "../../api";
+import { formatToLocalTime, formatToLocalDate } from "../../api";
 
 function TimeAndLocation({ weather: { dt, timezone }, units, setUnits }) {
 
@@ -11,8 +11,8 @@ function TimeAndLocation({ weather: { dt, timezone }, units, setUnits }) {
   return (
     <div>
       <div className="time-container">
-        <p>
-          {formatToLocalTime(dt,timezone)}
+        <p className="date">{formatToLocalDate(dt,timezone)}</p>
+        <p className="date">{formatToLocalTime(dt,timezone)}
         </p>
      
         <div className="unit-container">

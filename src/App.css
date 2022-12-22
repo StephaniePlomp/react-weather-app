@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
 
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,17 +7,14 @@
 }
 
 body {
-  height: 100%;
-  background: linear-gradient(351deg, rgba(231,99,8,1) 2%, rgba(37,128,187,100) 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(to bottom, #0f579b 1%,#9cc2e4 100%);
 }
 
 .container {
   width: 100%;
-  height: 100vh;
   position: relative;
   color: #fff;
+  min-height: 100vh;
 }
 
 .container:before {
@@ -31,19 +27,46 @@ body {
   z-index: -1;
 }
 
+.cloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./images/cloud.png") center center/cover;
+  animation: animate 400s linear infinite;
+  z-index: -4;
+}
+
+@keyframes animate {
+
+    0%
+    {
+      background-position: 0px;
+    }
+    100%
+    {
+      background-position: 5440px;
+    }
+}
+
 .dashboard {
-  display: flex;
-  max-width: 1050px;
+  columns: 2;
+  max-width: 700px;
+  min-height: 650px;
   padding-bottom: 50px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 1.3rem;
   letter-spacing: .3rem;
   text-transform: uppercase;
+  color: rgb(208, 127, 15);
+  font-weight: 900;
 }
 
 .intro {
@@ -52,32 +75,49 @@ h1 {
 }
 
 .search {
-  max-width: 350px;
+  max-width: 330px;
   margin: 0px auto;
   display: flex;
 }
 
+.location-button {
+  position: relative;
+  right: 40px;
+  top: 7px;
+}
+
+.location-button:hover {
+  color: rgb(208, 127, 15);
+}
+
+.location-button:active {
+  color: black;
+  transform: translateY(4px);
+}
+
 .location-search-input {
   font-family: 'Montserrat', sans-serif;
-  width: 350px;
+  width: 330px;
   height: 40px;
   background: none;
-  border: 2px solid black;
+  border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 5px;
   font-size: 1rem;
-  color: black;
+  color: white;
   padding: .7rem 1.5rem;
   font-size: 1.2rem;
-  border-radius: 25px;
-  border: 1px solid rgba(255,255,255, 0.8);
-  background: rgba(255,255,255, 0.1);
-  color: #f8f8f8;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .location-search-input:focus {
   outline: none !important;
-  border-color: rgb(255, 255, 255);
-  box-shadow: 0 0 30px rgb(222, 204, 155);
+  border: 2px solid rgba(255,255,255, 0.8);
+}
+
+.location-search-input:hover {
+  border: 2px solid rgba(255,255,255, 0.8);
 }
 
 .location-search-input::placeholder {
@@ -86,10 +126,9 @@ h1 {
 
 .input-suggestion {
   font-family:  'Montserrat', sans-serif;
-  width: 300px;
-  margin-left: 25px;
+  width: 310px;
+  margin: 0 10px 0 10px;
   height: 30px;
-  background-color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   padding: 1.4rem;
@@ -99,22 +138,24 @@ h1 {
 
 .autocomplete-dropdown-container {
     position: absolute;
-    z-index: 1;
-    width: 350px;
-    border-radius: 25px;
+    z-index: 100 !important;
+    width: 330px;
+    border-radius: 8px;
     background-color: rgb(255, 255, 255);
+    -webkit-transform: translate3d(0,0,0);
 }
 
 .time-container {
-  width: 300px;
-  border-radius: 6px;
-  box-shadow: 10px -2px 20px 2px rgb(0 0 0 / 30%);
+  width: 330px;
+  height: 190px;
+  border-radius: 8px;
   color: #fff;
-  background-color: rgba(255, 255, 255, 0.197);
-  backdrop-filter: blur(10px);
-  margin: 0 auto;
-  padding: 20px 20px 20px 20px;
-  
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .unit-container {
@@ -130,12 +171,20 @@ h1 {
   border: none;
   margin: 0 10px;
   cursor: pointer;
-  font-weight: 900;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .date {
-  width: 100%;
-  text-align: center;
-  margin-top: 40px;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+@media(max-width: 800px) {
+  .dashboard {
+    justify-content: center;
+    display: flex;
+    max-width: 500px;
+    }
 }
